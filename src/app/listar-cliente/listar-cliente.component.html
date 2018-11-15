@@ -1,0 +1,17 @@
+<table class="table table-stripped table-hover">
+	<tr>
+		<th>Nome</th>
+		<th>Limite</th>
+		<th>Tipo</th>
+		<th>Juros</th>
+	</tr>
+
+	<tr *ngFor="let cliente of clientes">
+		<td> {{cliente.nome}}</td>
+		<td> {{cliente.limite}}</td>
+		<td> {{cliente.tipo}}</td>
+		<td> {{cliente.juros | percent}}</td>
+	</tr>
+</table>
+
+<p>Clique <a [routerLink]="['/clientes/cadastrar']">aqui </a> para adicionar um novo cliente!</p>

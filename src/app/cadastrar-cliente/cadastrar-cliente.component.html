@@ -1,0 +1,48 @@
+<form #formCliente ="ngForm">
+	<div class="row invoice-info">
+        <div class="col-xs-12">
+             <p class="lead">Cadastro de Cliente</p>
+        </div>
+    </div>
+
+    <div class="form-group" [class.has-success] = "nome.valid && (nome.dirty || nome.touched)"
+     [class.has-error] = "nome.invalid && (nome.dirty || nome.touched)">
+        <label class="control-label " for="inputNome">
+            Nome:
+        </label>
+        <input type="text" class="form-control" id="inputNome" placeholder="Nome"  minlength="4"     required [(ngModel)]="cliente.nome" name = "nome" #nome="ngModel"> 
+        <span class="help-block" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+            <i class="fa fa-remove"></i> O nome do cliente deve ter no mínimo 4 caracteres
+        </span>
+    </div>
+
+    <div class="form-group" [class.has-success] = "limite.valid && (limite.dirty || limite.touched)"
+     [class.has-error] = "limite.invalid && (limite.dirty || limite.touched)">
+        <label class="control-label" for="inputLimite">
+            Limite de Crédito:
+        </label>
+        <input type="number" class="form-control" id="inputLimite" required [(ngModel)]="cliente.limite" name = "limite" #limite="ngModel"> 
+        <span class="help-block" *ngIf="limite.invalid && (limite.dirty || limite.touched)">
+            <i class="fa fa-remove"></i> O limite de crédito é obrigatório
+        </span>
+    </div>
+
+    <div class="form-group" [class.has-success] = "tipo.valid && (tipo.dirty || tipo.touched)" 
+     [class.has-error] = "tipo.invalid && (tipo.dirty || tipo.touched)">
+     	<label for="sel1">Selecione:</label>
+ 		<select class="form-control" id="sel1" name="tipo" [(ngModel)]="cliente.tipo" #tipo="ngModel" required>
+ 			<option *ngFor="let t of tipos" [value]="t">{{t| uppercase}}</option>
+  		</select>
+  		<span class="help-block" *ngIf="tipo.invalid  && (tipo.dirty || tipo.touched)">
+  			<i class="fa fa-remove"></i> Tipo obrigatório
+  		</span>
+  	</div>
+
+  	<div class="form-group text-center">
+  		<input type="submit" class="btn btn-success" (click)="salvar()" 
+  		 value="Cadastrar" [disabled]="!formCliente.form.valid"> 
+  		 <a [routerLink]="['/clientes/listar']" class="btn btn-default">
+  		 	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Voltar
+  		 </a>
+  	</div>
+</form>
